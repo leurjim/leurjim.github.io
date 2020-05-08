@@ -6,9 +6,13 @@ function activateGallery() {
   let mainImage  = document.querySelector("#gallery-photo img");
 
   thumbnails.forEach(function(thumbnail) {
+    // Precargar imágenes grandes.
+    let newImageScr  = thumbnail.dataset.largeVersion;
+    let largeVersion = new Image();
+    largeVersion.src = newImageScr;
+
     thumbnail.addEventListener("click", function() {
       // Establecer imagen clicada como imagen principal.
-      let newImageScr = thumbnail.dataset.largeVersion;
       mainImage.setAttribute("src", newImageScr);
       mainImage.setAttribute("alt", thumbnail.alt);
 
