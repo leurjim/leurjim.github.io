@@ -1,3 +1,28 @@
+// Activa la galería de imágenes.
+// La tarea principal para adjuntar un detector de eventos a cada imagen en la galería
+// y responda adecuadamente al hacer click.
 function activateGallery() {
-  alert("Hola desde el archivo de la galería!");
+  let thumbnails = document.querySelectorAll("#gallery-thumbs > div > img");
+  let mainImage  = document.querySelector("#gallery-photo img");
+
+  thumbnails.forEach(function(thumbnail) {
+    thumbnail.addEventListener("click", function() {
+      // Establecer imagen clicada como imagen principal.
+      let newImageScr = thumbnail.dataset.largeVersion;
+      mainImage.setAttribute("src", newImageScr);
+      mainImage.setAttribute("alt", thumbnail.alt);
+
+      // Cambiar qué imagen es current.
+      document.querySelector(".current").classList.remove("current");
+      thumbnail.parentNode.classList.add("current");
+
+      // Actualiza la información de la imagen.
+      let galleryInfo = document.querySelector("#gallery-info");
+      let title       = galleryInfo.querySelector(".title");
+      let description = galleryInfo.querySelector(".description");
+
+      title.innerHTML       = thumbnail.dataset.title;
+      description.innerHTML = thumbnail.dataset.description;
+    });
+  });
 }
